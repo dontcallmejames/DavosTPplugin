@@ -18,6 +18,7 @@ const ACTIONS = {
   CHAT:     `${PLUGIN_ID}_action_chat`,
   SEARCH:   `${PLUGIN_ID}_action_search`,
   BRIEFING: `${PLUGIN_ID}_action_briefing`,
+  KILL:     `${PLUGIN_ID}_action_kill`,
   CLEAR:    `${PLUGIN_ID}_action_clear`,
 };
 
@@ -59,6 +60,21 @@ function startTP() {
 
     if (actionId === ACTIONS.CLEAR) {
       TPClient.stateUpdate(STATES.RESPONSE, '');
+      return;
+    }
+
+    if (actionId === ACTIONS.KILL) {
+      console.log('[TP] Kill switch triggered');
+      // Close the gateway connection abruptly â€” this interrupts any in-progress stream
+      if (gatewayWs) {
+        gatewayWs.terminate();
+        gatewayWs = null;
+      }
+      setStatus('Killed');
+      setThinking(false);
+      TPClient.stateUpdate(STATES.RESPONSE, '[Stopped]');
+      // Reconnect after a short pause so Davos comes back ready
+      setTimeout(() => connectGateway(), 2000);
       return;
     }
 
