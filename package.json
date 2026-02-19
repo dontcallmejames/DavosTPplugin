@@ -1,0 +1,19 @@
+{
+  "name": "davos-tp-plugin",
+  "version": "1.0.0",
+  "description": "Touch Portal plugin for Davos AI assistant",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "package": "node scripts/package.js"
+  },
+  "dependencies": {
+    "touchportal-api": "^1.2.0",
+    "ws": "^8.17.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "dontcallmejames",
+  "license": "MIT"
+}
