@@ -1,1 +1,1 @@
-// Your new content here
+<file-content>
